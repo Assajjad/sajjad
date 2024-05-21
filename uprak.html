@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nota Penjualan</title>
+  <link rel="stylesheet" href="assets/style1.css">
+</head>
+<body>
+  <div id="app" class="nota">
+    <div class="toko-info">
+      <img class="logo" src="logo.png" alt="logo">
+      <div>
+        <h2>{{ namaToko }}</h2>
+      </div>
+    </div>
+    <div class="nota-info">
+      <p>No. Nota: <input type="text" v-model="noNota"></p>
+      <p>Pelanggan: <input type="text" v-model="namaPelanggan"></p>
+      <p>Tanggal: <input type="date" v-model="tanggal"></p>
+      <p>Kode barang: <input type="number" v-model="kodebarang"></p>
+      <p>Nama barang: <input type="text" v-model="namabarang" ></p>
+      <p>Quantity: <input type="number" v-model="quantity" ></p>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>id Barang</th>
+          <th>Nama Barang</th>
+          <th>Qty</th>
+          <th>Harga Satuan</th>
+          <th>Jumlah</th>
+          <th>Opsi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(item, index) in items" :key="index">
+          <td>{{ item.id }}</td>
+          <td>{{ item.nama }}</td>
+          <td>{{ item.qty }}</td>
+          <td>{{ item.harga }}</td>
+          <td>{{ item.qty * item.harga }}</td>
+          <td>
+            <button @click="hapusItem(index)">Hapus</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="total">
+        <p>Sub Total: <input type="text"></p>
+        <p>Diskon: <input type="number" v-model="diskon"></p>
+        <p>Total Harga: <input type="text"></p>
+        <p>Bayar: <input type="text" v-model="bayar"></p>
+        <p>Kembalian: <input type="text"></p>
+        <p>Total Pembayaran: <input type="text" v-model="totalPembayaran"></p>
+      </div>      
+    <button v-on:click="selesai">Selesai</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        namaToko: 'bayu store',
+        noNota: '001',
+        namaPelanggan: 'Saaaaa',
+        tanggal: '2024-05-21',
+        kodebarang:'',
+        namabarang:'',
+        quantity:'',
+        items: [
+          { id: '001', nama: 'permen', qty: 30, harga: 100 },
+          { id: '002', nama: 'ciki', qty: 19, harga: 150 }
+        ],
+        subTotal: '',
+        diskon: '' ,
+        totalHarga: '',
+        bayar: '',
+        kembalian: '',
+        totalPembayaran: '' 
+      },
+      methods: {
+        hapusItem(index) {
+          this.items.splice(index, 1);
+        },
+        selesai() { 
+        }
+      },
+      computed: {
+          }
+    });
+  </script>
+</body>
+</html>
